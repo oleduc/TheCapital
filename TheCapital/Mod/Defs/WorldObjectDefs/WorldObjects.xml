@@ -41,7 +41,7 @@
     <WorldObjectDef>
         <defName>CapitalDefenseBase</defName>
         <label>Military base</label>
-        <description>A sprawling wind farm, solar panels arrays and a large heavily guarded concrete building.</description>
+        <description>A very large walled area that seem to contain an airstrip, multiple hangars and several baracks. Silo doors can be seen next to a massive and ominous concrete building</description>
         <texture>CapitalWorld/WorldObjects/CapitalDefenseBase</texture>
         <expandingIcon>false</expandingIcon>
         <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
