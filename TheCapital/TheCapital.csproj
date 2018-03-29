@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="TheCapitalMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TheCapital\CapitalWorldObject.cs" />
     <Compile Include="TheCapital\WorldGenStep_Capital.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,7 +58,10 @@
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalFactory.png" />
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalFarm.png" />
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalPowerPlant.png" />
-    <Content Include="Mod\Textures\CapitalWorld\WorldObjects\MilitaryBase.png" />
+    <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalDefenseBase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mod\BiomeDefs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

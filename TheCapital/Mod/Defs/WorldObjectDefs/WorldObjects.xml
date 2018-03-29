@@ -8,33 +8,42 @@
         <expandingIcon>true</expandingIcon>
         <expandingIconTexture>CapitalWorld/WorldObjects/CapitalCenter</expandingIconTexture>
         <expandingIconPriority>50</expandingIconPriority>
+        <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
     </WorldObjectDef>
 
     <WorldObjectDef>
         <defName>CapitalFarm</defName>
         <label>Farm land</label>
         <description>Sprawling farmland large enough to feed thousands.</description>
-        <texture>World/WorldObjects/CapitalFarm</texture>
+        <texture>CapitalWorld/WorldObjects/CapitalFarm</texture>
+        <expandingIcon>false</expandingIcon>
+        <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
     </WorldObjectDef>
 
     <WorldObjectDef>
         <defName>CapitalFactory</defName>
         <label>Commercial district</label>
         <description>A massive commercial district where most citizens of the capital must work.</description>
-        <texture>World/WorldObjects/CapitalFactory</texture>
+        <texture>CapitalWorld/WorldObjects/CapitalFactory</texture>
+        <expandingIcon>false</expandingIcon>
+        <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
     </WorldObjectDef>
 
     <WorldObjectDef>
         <defName>CapitalPowerPlant</defName>
         <label>Power plant</label>
         <description>A sprawling wind farm, solar panels arrays and a large heavily guarded concrete building.</description>
-        <texture>World/WorldObjects/CapitalPowerPlant</texture>
+        <texture>CapitalWorld/WorldObjects/CapitalPowerPlant</texture>
+        <expandingIcon>false</expandingIcon>
+        <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
     </WorldObjectDef>
 
     <WorldObjectDef>
-        <defName>MilitaryBase</defName>
-        <label>Military Base</label>
+        <defName>CapitalDefenseBase</defName>
+        <label>Military base</label>
         <description>A sprawling wind farm, solar panels arrays and a large heavily guarded concrete building.</description>
-        <texture>World/WorldObjects/MilitaryBase</texture>
+        <texture>CapitalWorld/WorldObjects/CapitalDefenseBase</texture>
+        <expandingIcon>false</expandingIcon>
+        <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
     </WorldObjectDef>
 </Defs>

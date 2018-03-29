@@ -3,3 +3,5 @@ TheCapital/Libraries
 ExamplesMods
 **/bin
 **/obj
+**/*.lnk
+**/*.dll
