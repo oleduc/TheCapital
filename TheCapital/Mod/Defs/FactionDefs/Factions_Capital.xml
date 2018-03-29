@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<FactionDef>
+    <defName>Capital</defName>
+    <label>The Capital</label>
+    <description>These people are from the largest and most powerful city on the planet. Just like most other people on this planet, they appear to have been established here for centuries yet they do not possess space age technology anymore. Thread lightly however, because while they may lack the numbers of other less advanced factions or the means to reach for the stars they are truely a force to be reckoned with.</description>
+    <leaderTitle>chancelor</leaderTitle>
+    <pawnsPlural>citizens</pawnsPlural>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <fixedName>The Capital</fixedName>
+    <techLevel>Industrial</techLevel>
+    <backstoryCategory>Civil</backstoryCategory>
+    <hidden>true</hidden>
+    <rescueesCanJoin>true</rescueesCanJoin>
+    <autoFlee>false</autoFlee>
+    <geneticVariance>1</geneticVariance>
+    <hairTags>
+        <li>Urban</li>
+    </hairTags>
+    <apparelStuffFilter>
+        <thingDefs>
+            <li>Synthread</li>
+            <li>Hyperweave</li>
+        </thingDefs>
+    </apparelStuffFilter>
+</FactionDef>
+</Defs>

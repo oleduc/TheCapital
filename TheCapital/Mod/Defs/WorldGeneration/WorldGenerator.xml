@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <WorldGenStepDef>
+        <defName>Capital</defName>
+        <order>550</order>
+        <worldGenStep Class="TheCapital.WorldGenStep_Capital"/>
+    </WorldGenStepDef>
+
+</Defs>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldObjectDef>
+        <defName>CapitalCenter</defName>
+        <label>capital</label>
+        <description>A massive metropolis area complete with a capitol.</description>
+        <texture>CapitalWorld/WorldObjects/CapitalCenter</texture>
+        <expandingIcon>true</expandingIcon>
+        <expandingIconTexture>CapitalWorld/WorldObjects/CapitalCenter</expandingIconTexture>
+        <expandingIconPriority>50</expandingIconPriority>
+    </WorldObjectDef>
+
+    <WorldObjectDef>
+        <defName>CapitalFarm</defName>
+        <label>Farm land</label>
+        <description>Sprawling farmland large enough to feed thousands.</description>
+        <texture>World/WorldObjects/CapitalFarm</texture>
+    </WorldObjectDef>
+
+    <WorldObjectDef>
+        <defName>CapitalFactory</defName>
+        <label>Commercial district</label>
+        <description>A massive commercial district where most citizens of the capital must work.</description>
+        <texture>World/WorldObjects/CapitalFactory</texture>
+    </WorldObjectDef>
+
+    <WorldObjectDef>
+        <defName>CapitalPowerPlant</defName>
+        <label>Power plant</label>
+        <description>A sprawling wind farm, solar panels arrays and a large heavily guarded concrete building.</description>
+        <texture>World/WorldObjects/CapitalPowerPlant</texture>
+    </WorldObjectDef>
+
+    <WorldObjectDef>
+        <defName>MilitaryBase</defName>
+        <label>Military Base</label>
+        <description>A sprawling wind farm, solar panels arrays and a large heavily guarded concrete building.</description>
+        <texture>World/WorldObjects/MilitaryBase</texture>
+    </WorldObjectDef>
+</Defs>
