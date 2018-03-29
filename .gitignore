@@ -1,3 +1,5 @@
 .idea
 TheCapital/Libraries
 ExamplesMods
+**/bin
+**/obj

@@ -1,8 +1,0 @@
-C:\Users\oleduc\Apps\TheCapital\TheCapital\bin\Debug\TheCapital.dll
-C:\Users\oleduc\Apps\TheCapital\TheCapital\bin\Debug\TheCapital.pdb
-C:\Users\oleduc\Apps\TheCapital\TheCapital\bin\Debug\Assembly-CSharp.dll
-C:\Users\oleduc\Apps\TheCapital\TheCapital\bin\Debug\UnityEngine.dll
-C:\Users\oleduc\Apps\TheCapital\TheCapital\obj\Debug\TheCapital.csprojResolveAssemblyReference.cache
-C:\Users\oleduc\Apps\TheCapital\TheCapital\obj\Debug\TheCapital.csproj.CoreCompileInputs.cache
-C:\Users\oleduc\Apps\TheCapital\TheCapital\obj\Debug\TheCapital.dll
-C:\Users\oleduc\Apps\TheCapital\TheCapital\obj\Debug\TheCapital.pdb
