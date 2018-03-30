@@ -7,7 +7,7 @@ namespace TheCapital
 {
     public class WorldGenStep_Capital : WorldGenStep
     {
-        private readonly List<WorldObject> capitalWorldObjs = new List<WorldObject>();
+        private List<WorldObject> capitalWorldObjs = new List<WorldObject>();
         
         // Zone tiles
         private List<int> neighboors = new List<int>();
@@ -29,7 +29,7 @@ namespace TheCapital
         {
             var faction = FactionUtility.DefaultFactionFrom(DefDatabase<FactionDef>.GetNamed("Capital"));
 
-            InitializeDefs();
+            Initialize();
             
             // Setup capital center
             var capitalCenter = WorldObjectMaker.MakeWorldObject(centerDef);
@@ -50,8 +50,15 @@ namespace TheCapital
             }
         }
 
-        private void InitializeDefs()
+        private void Initialize()
         {
+            capitalWorldObjs = new List<WorldObject>();
+            neighboors = new List<int>();
+            core = new List<int>();
+            wall = new List<int>();
+            outerRim = new List<int>();
+            dominion = new List<int>();
+            
             centerDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalCenter");
             downtownDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalDowntown");
             housingDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalHousing");
