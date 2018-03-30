@@ -6,8 +6,26 @@
         <description>A massive metropolis area complete with a capitol.</description>
         <texture>CapitalWorld/WorldObjects/CapitalCenter</texture>
         <expandingIcon>true</expandingIcon>
-        <expandingIconTexture>CapitalWorld/WorldObjects/CapitalCenter</expandingIconTexture>
+        <expandingIconTexture>CapitalWorld/WorldObjects/Capital</expandingIconTexture>
         <expandingIconPriority>50</expandingIconPriority>
+        <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
+    </WorldObjectDef>
+
+    <WorldObjectDef>
+        <defName>CapitalDowntown</defName>
+        <label>Downtown district</label>
+        <description>High density housing.</description>
+        <texture>CapitalWorld/WorldObjects/CapitalDowntown</texture>
+        <expandingIcon>false</expandingIcon>
+        <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
+    </WorldObjectDef>
+    
+    <WorldObjectDef>
+        <defName>CapitalHousing</defName>
+        <label>Subburbean area</label>
+        <description>Low density housing.</description>
+        <texture>CapitalWorld/WorldObjects/CapitalHousing</texture>
+        <expandingIcon>false</expandingIcon>
         <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
     </WorldObjectDef>
 
@@ -31,9 +49,18 @@
 
     <WorldObjectDef>
         <defName>CapitalPowerPlant</defName>
-        <label>Power plant</label>
-        <description>A sprawling wind farm, solar panels arrays and a large heavily guarded concrete building.</description>
+        <label>Nuclear Power plant</label>
+        <description>A large heavily guarded concrete building with two massive cooling tower surrounded by security installations.</description>
         <texture>CapitalWorld/WorldObjects/CapitalPowerPlant</texture>
+        <expandingIcon>false</expandingIcon>
+        <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
+    </WorldObjectDef>
+
+    <WorldObjectDef>
+        <defName>CapitalWindFarm</defName>
+        <label>Eolian Power plant</label>
+        <description>A large heavily guarded concrete building with two massive cooling tower surrounded by security installations.</description>
+        <texture>CapitalWorld/WorldObjects/CapitalWindFarm</texture>
         <expandingIcon>false</expandingIcon>
         <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
     </WorldObjectDef>

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TheCapital</RootNamespace>
     <AssemblyName>TheCapital</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="TheCapitalMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TheCapital\CapitalsManager.cs" />
+    <Compile Include="TheCapital\CapitalState.cs" />
     <Compile Include="TheCapital\CapitalWorldObject.cs" />
     <Compile Include="TheCapital\WorldGenStep_Capital.cs" />
   </ItemGroup>

@@ -3,7 +3,7 @@
 
     <WorldGenStepDef>
         <defName>Capital</defName>
-        <order>550</order>
+        <order>481</order>
         <worldGenStep Class="TheCapital.WorldGenStep_Capital"/>
     </WorldGenStepDef>
 
