@@ -7,7 +7,7 @@ namespace TheCapital
 {
     public class WorldGenStep_Capital : WorldGenStep
     {
-        private List<WorldObject> capitalWorldObjs = new List<WorldObject>();
+        private List<WorldObject> _capitalWorldObjs = new List<WorldObject>();
         
         // Zone tiles
         private List<int> _neighboors = new List<int>();
@@ -34,7 +34,7 @@ namespace TheCapital
             // Setup capital center
             var capitalCenter = WorldObjectMaker.MakeWorldObject(_centerDef);
             capitalCenter.Tile = TileFinder.RandomFactionBaseTileFor(null);
-            capitalWorldObjs.Add(capitalCenter);
+            _capitalWorldObjs.Add(capitalCenter);
 
             MapSurroundings(capitalCenter.Tile);
 
@@ -43,7 +43,7 @@ namespace TheCapital
             GenerateCapitalOuterRim();
 
             // Place into the world
-            foreach (var worldObj in capitalWorldObjs)
+            foreach (var worldObj in _capitalWorldObjs)
             {
                 worldObj.SetFaction(faction);
                 Find.World.worldObjects.Add(worldObj);
@@ -52,7 +52,7 @@ namespace TheCapital
 
         private void Initialize()
         {
-            capitalWorldObjs = new List<WorldObject>();
+            _capitalWorldObjs = new List<WorldObject>();
             _neighboors = new List<int>();
             _core = new List<int>();
             _wall = new List<int>();
@@ -101,7 +101,7 @@ namespace TheCapital
             {
                 var downtown = WorldObjectMaker.MakeWorldObject(_downtownDef);
                 downtown.Tile = neighboor;
-                capitalWorldObjs.Add(downtown);
+                _capitalWorldObjs.Add(downtown);
             }
         }
         
@@ -122,7 +122,7 @@ namespace TheCapital
             var powerPlant = WorldObjectMaker.MakeWorldObject(_powerPlantDef);
             powerPlant.Tile = _core.RandomElement();
             _core.Remove(powerPlant.Tile);
-            capitalWorldObjs.Add(powerPlant);
+            _capitalWorldObjs.Add(powerPlant);
 
             foreach (var coreTileId in _core)
             {
@@ -132,7 +132,7 @@ namespace TheCapital
                 {
                     var obj = WorldObjectMaker.MakeWorldObject(defType);
                     obj.Tile = coreTileId;
-                    capitalWorldObjs.Add(obj);
+                    _capitalWorldObjs.Add(obj);
                 }
             }
         }
@@ -144,7 +144,7 @@ namespace TheCapital
                 var farm = WorldObjectMaker.MakeWorldObject(_farmDef);
                 farm.Tile = _outerRim.RandomElement();
                 _outerRim.Remove(farm.Tile);
-                capitalWorldObjs.Add(farm);
+                _capitalWorldObjs.Add(farm);
             }
             
             for (var i = 0; i < 4; i++)
@@ -152,7 +152,7 @@ namespace TheCapital
                 var windFarm = WorldObjectMaker.MakeWorldObject(_windFarmDef);
                 windFarm.Tile = _outerRim.RandomElement();
                 _outerRim.Remove(windFarm.Tile);
-                capitalWorldObjs.Add(windFarm);
+                _capitalWorldObjs.Add(windFarm);
             }
             
             for (var i = 0; i < 4; i++)
@@ -160,7 +160,7 @@ namespace TheCapital
                 var militaryBase = WorldObjectMaker.MakeWorldObject(_defenseBaseDef);
                 militaryBase.Tile = _outerRim.RandomElement();
                 _outerRim.Remove(militaryBase.Tile);
-                capitalWorldObjs.Add(militaryBase);
+                _capitalWorldObjs.Add(militaryBase);
             }
         }
     }
