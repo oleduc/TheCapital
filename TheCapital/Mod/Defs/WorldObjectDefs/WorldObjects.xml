@@ -9,6 +9,10 @@
         <expandingIconTexture>CapitalWorld/WorldObjects/Capital</expandingIconTexture>
         <expandingIconPriority>50</expandingIconPriority>
         <worldObjectClass>TheCapital.CapitalWorldObject</worldObjectClass>
+        <worldObjectClass>MapParent</worldObjectClass>
+        <comps>
+            <li Class="WorldObjectCompProperties_Abandon" />
+        </comps>
     </WorldObjectDef>
 
     <WorldObjectDef>

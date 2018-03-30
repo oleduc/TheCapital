@@ -10,20 +10,20 @@ namespace TheCapital
         private List<WorldObject> capitalWorldObjs = new List<WorldObject>();
         
         // Zone tiles
-        private List<int> neighboors = new List<int>();
-        private List<int> core = new List<int>();
-        private List<int> wall = new List<int>();
-        private List<int> outerRim = new List<int>();
-        private List<int> dominion = new List<int>();
+        private List<int> _neighboors = new List<int>();
+        private List<int> _core = new List<int>();
+        private List<int> _wall = new List<int>();
+        private List<int> _outerRim = new List<int>();
+        private List<int> _dominion = new List<int>();
 
-        private WorldObjectDef centerDef;
-        private WorldObjectDef downtownDef;
-        private WorldObjectDef housingDef;
-        private WorldObjectDef farmDef;
-        private WorldObjectDef factoryDef;
-        private WorldObjectDef powerPlantDef;
-        private WorldObjectDef windFarmDef;
-        private WorldObjectDef defenseBaseDef;
+        private WorldObjectDef _centerDef;
+        private WorldObjectDef _downtownDef;
+        private WorldObjectDef _housingDef;
+        private WorldObjectDef _farmDef;
+        private WorldObjectDef _factoryDef;
+        private WorldObjectDef _powerPlantDef;
+        private WorldObjectDef _windFarmDef;
+        private WorldObjectDef _defenseBaseDef;
         
         public override void GenerateFresh(string seed)
         {
@@ -32,7 +32,7 @@ namespace TheCapital
             Initialize();
             
             // Setup capital center
-            var capitalCenter = WorldObjectMaker.MakeWorldObject(centerDef);
+            var capitalCenter = WorldObjectMaker.MakeWorldObject(_centerDef);
             capitalCenter.Tile = TileFinder.RandomFactionBaseTileFor(null);
             capitalWorldObjs.Add(capitalCenter);
 
@@ -53,20 +53,20 @@ namespace TheCapital
         private void Initialize()
         {
             capitalWorldObjs = new List<WorldObject>();
-            neighboors = new List<int>();
-            core = new List<int>();
-            wall = new List<int>();
-            outerRim = new List<int>();
-            dominion = new List<int>();
+            _neighboors = new List<int>();
+            _core = new List<int>();
+            _wall = new List<int>();
+            _outerRim = new List<int>();
+            _dominion = new List<int>();
             
-            centerDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalCenter");
-            downtownDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalDowntown");
-            housingDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalHousing");
-            farmDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalFarm");
-            factoryDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalFactory");
-            powerPlantDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalPowerPlant");
-            windFarmDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalWindFarm");
-            defenseBaseDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalDefenseBase");
+            _centerDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalCenter");
+            _downtownDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalDowntown");
+            _housingDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalHousing");
+            _farmDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalFarm");
+            _factoryDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalFactory");
+            _powerPlantDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalPowerPlant");
+            _windFarmDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalWindFarm");
+            _defenseBaseDef = DefDatabase<WorldObjectDef>.GetNamed("CapitalDefenseBase");
         }
 
         private void MapSurroundings(int capitalCenterTileId)
@@ -77,19 +77,19 @@ namespace TheCapital
                 if (tileInfo.WaterCovered) return false;
                 
                 if (dist == 1)
-                    neighboors.Add(tile);
+                    _neighboors.Add(tile);
                 
                 if (dist > 1 && dist <= 3)
-                    core.Add(tile);
+                    _core.Add(tile);
                  
                 if (dist == 4)
-                    wall.Add(tile);
+                    _wall.Add(tile);
                 
                 if (dist > 5 && dist <= 9)
-                    outerRim.Add(tile);
+                    _outerRim.Add(tile);
 
                 if (dist > 9 && dist < 14)
-                    dominion.Add(tile);
+                    _dominion.Add(tile);
                 
                 return dist > 14;
             });
@@ -97,9 +97,9 @@ namespace TheCapital
 
         private void GenerateDowntown()
         {
-            foreach (var neighboor in neighboors)
+            foreach (var neighboor in _neighboors)
             {
-                var downtown = WorldObjectMaker.MakeWorldObject(downtownDef);
+                var downtown = WorldObjectMaker.MakeWorldObject(_downtownDef);
                 downtown.Tile = neighboor;
                 capitalWorldObjs.Add(downtown);
             }
@@ -109,22 +109,22 @@ namespace TheCapital
         {
             var coreChances = new List<WorldObjectDef>
             {
-                housingDef,
-                housingDef,
-                housingDef,
-                downtownDef,
-                factoryDef,
-                factoryDef,
+                _housingDef,
+                _housingDef,
+                _housingDef,
+                _downtownDef,
+                _factoryDef,
+                _factoryDef,
                 null,
                 null
             };
             
-            var powerPlant = WorldObjectMaker.MakeWorldObject(powerPlantDef);
-            powerPlant.Tile = core.RandomElement();
-            core.Remove(powerPlant.Tile);
+            var powerPlant = WorldObjectMaker.MakeWorldObject(_powerPlantDef);
+            powerPlant.Tile = _core.RandomElement();
+            _core.Remove(powerPlant.Tile);
             capitalWorldObjs.Add(powerPlant);
 
-            foreach (var coreTileId in core)
+            foreach (var coreTileId in _core)
             {
                 var defType = coreChances.RandomElement();
                 
@@ -141,25 +141,25 @@ namespace TheCapital
         {
             for (var i = 0; i < 14; i++)
             {
-                var farm = WorldObjectMaker.MakeWorldObject(farmDef);
-                farm.Tile = outerRim.RandomElement();
-                outerRim.Remove(farm.Tile);
+                var farm = WorldObjectMaker.MakeWorldObject(_farmDef);
+                farm.Tile = _outerRim.RandomElement();
+                _outerRim.Remove(farm.Tile);
                 capitalWorldObjs.Add(farm);
             }
             
             for (var i = 0; i < 4; i++)
             {
-                var windFarm = WorldObjectMaker.MakeWorldObject(windFarmDef);
-                windFarm.Tile = outerRim.RandomElement();
-                outerRim.Remove(windFarm.Tile);
+                var windFarm = WorldObjectMaker.MakeWorldObject(_windFarmDef);
+                windFarm.Tile = _outerRim.RandomElement();
+                _outerRim.Remove(windFarm.Tile);
                 capitalWorldObjs.Add(windFarm);
             }
             
             for (var i = 0; i < 4; i++)
             {
-                var militaryBase = WorldObjectMaker.MakeWorldObject(defenseBaseDef);
-                militaryBase.Tile = outerRim.RandomElement();
-                outerRim.Remove(militaryBase.Tile);
+                var militaryBase = WorldObjectMaker.MakeWorldObject(_defenseBaseDef);
+                militaryBase.Tile = _outerRim.RandomElement();
+                _outerRim.Remove(militaryBase.Tile);
                 capitalWorldObjs.Add(militaryBase);
             }
         }
