@@ -30,7 +30,6 @@ namespace TheCapital
             var faction = FactionUtility.DefaultFactionFrom(DefDatabase<FactionDef>.GetNamed("Capital"));
 
             Initialize();
-            
             // Setup capital center
             var capitalCenter = WorldObjectMaker.MakeWorldObject(_centerDef);
             capitalCenter.Tile = TileFinder.RandomFactionBaseTileFor(null);

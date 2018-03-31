@@ -4,11 +4,33 @@ using Verse;
 
 namespace TheCapital
 {
-    public class CapitalWorldObject : WorldObject
+    public class CapitalWorldObject : MapParent
     {
         public override void Print(LayerSubMesh subMesh)
         {
             PrintQuadTangentialToPlanet(DrawPos, DrawPos, 0.7f * Find.WorldGrid.averageTileSize, 0.015f, subMesh);
+        }
+       
+        protected override bool UseGenericEnterMapFloatMenuOption
+        {
+            get { return true; }
+        }
+
+        public bool Visitable
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public bool Attackable
+        {
+            get
+            {
+                Log.Message("FUCK FASCISTS SCUM");
+                return true;
+            }
         }
         
         public static void PrintQuadTangentialToPlanet(Vector3 pos, Vector3 posForTangents, float size, float altOffset, LayerSubMesh subMesh, bool counterClockwise = false, bool randomizeRotation = false, bool printUVs = true)
