@@ -1,4 +1,6 @@
-﻿using RimWorld.Planet;
+﻿using System;
+using System.Collections.Generic;
+using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
@@ -10,27 +12,15 @@ namespace TheCapital
         {
             PrintQuadTangentialToPlanet(DrawPos, DrawPos, 0.7f * Find.WorldGrid.averageTileSize, 0.015f, subMesh);
         }
-       
-        protected override bool UseGenericEnterMapFloatMenuOption
+        
+        public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
         {
-            get { return true; }
-        }
-
-        public bool Visitable
-        {
-            get
+            var options = new List<FloatMenuOption>
             {
-                return true;
-            }
-        }
-
-        public bool Attackable
-        {
-            get
-            {
-                Log.Message("FUCK FASCISTS SCUM");
-                return true;
-            }
+                new FloatMenuOption("Focken shieeett", new Action(() => { Log.Message("EAT SHIEEETT"); }))
+            };
+            
+            return options;
         }
         
         public static void PrintQuadTangentialToPlanet(Vector3 pos, Vector3 posForTangents, float size, float altOffset, LayerSubMesh subMesh, bool counterClockwise = false, bool randomizeRotation = false, bool printUVs = true)
