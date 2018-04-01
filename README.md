@@ -9,3 +9,7 @@
 - [ ] Can have various political agendas
 - [ ] Reacts to world event
 
+## Resources
+
+https://spdskatr.github.io/RWModdingResources/
+https://github.com/roxxploxx/RimWorldModGuide/wiki
