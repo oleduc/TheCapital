@@ -1,5 +1,5 @@
 .idea
-TheCapital/Libraries
+TheCapital/Libraries/*.dll
 ExamplesMods
 **/bin
 **/obj
