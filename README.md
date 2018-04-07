@@ -17,7 +17,7 @@ The capital is a Rimworld mod that aims to expand on the game's politics and pow
 
 ## Contributing
 
-All contributions are welcome and encouraged. Make sure to open an issue or comment on an existing issue to let us know that you intend to work on something :)
+All contributions are welcomed and encouraged. Make sure to open an issue or comment on an existing issue to let us know that you intend to work on something :)
 
 ## Source setup
 
