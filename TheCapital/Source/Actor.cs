@@ -1,9 +1,11 @@
-﻿using Verse;
+﻿using RimWorld;
+using RimWorld.Planet;
+using Verse;
 
 namespace TheCapital
 {
-    public class Vehicule : ThingWithComps
+    public class Actor : ThingWithComps
     {
-        
+
     }
 }

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef Name="VehicleBase" Abstract="True">
+        <thingClass>TheCapital.Actor</thingClass>
+        <category>Actor</category>
+        <selectable>true</selectable>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Pawn</altitudeLayer>
+        <useHitPoints>false</useHitPoints>
+        <hasTooltip>true</hasTooltip>
+        <soundImpactDefault>BulletImpactFlesh</soundImpactDefault>
+        <drawGUIOverlay>true</drawGUIOverlay>
+    </ThingDef>
+
+    <ThingDef ParentName="VehicleBase">
+        <defName>TransportHelicopter</defName>
+        <label>transport helicopter</label>
+        <category>Item</category>
+        <scatterableOnMapGen>false</scatterableOnMapGen>
+        <tickerType>Normal</tickerType>
+        <graphicData>
+            <texPath>Things/Special/DropPod</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>1.9</drawSize>
+            <shadowData>
+                <volume>(0.8, 0.6, 0.8)</volume>
+            </shadowData>
+        </graphicData>
+        <altitudeLayer>Building</altitudeLayer>
+        <blockWind>true</blockWind>
+        <useHitPoints>true</useHitPoints>
+        <statBases>
+            <MaxHitPoints>500</MaxHitPoints>
+            <Flammability>0</Flammability>
+        </statBases>
+        <selectable>true</selectable>
+    </ThingDef>
+    
+</Defs>
