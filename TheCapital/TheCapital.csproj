@@ -62,6 +62,7 @@
   <ItemGroup>
     <Content Include="Mod\About\About.xml" />
     <Content Include="Mod\Defs\FactionDefs\Factions_Capital.xml" />
+    <Content Include="Mod\Defs\ThingDefs_Misc\TransportHelicopter.xml" />
     <Content Include="Mod\Defs\WorldGeneration\WorldGenerator.xml" />
     <Content Include="Mod\Defs\WorldObjectDefs\WorldObjects.xml" />
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalCenter.png" />
@@ -69,7 +70,6 @@
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalFarm.png" />
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalPowerPlant.png" />
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalDefenseBase.png" />
-    <Content Include="Mod\ThingDef_Vehicles\TransportHelicopter.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mod\BiomeDefs" />
