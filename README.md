@@ -3,7 +3,7 @@
 The capital is a Rimworld mod that aims to expand on the game's politics and power dynamics. It is meant to give the player a challenge that must be managed from the early-mid game all the way into the very late game. The capital is a very large industrial city that occupies several tiles and its economy, population and military power are all based on its infrastructure rather than it being proportional to the player's wealth like other factions. Its dominance over the planet and its very existence is a balancing act as its resources and influence are limited and as such, it is up to the player to make that balance tip one way or another.
 
 <p align="center">
-  ![City](\Assets\Screenshots\worldgen.png)
+  <img src="https://raw.githubusercontent.com/oleduc/TheCapital/master/Assets/Screenshots/worldgen.png" />
 </p>
 
 ## Features
