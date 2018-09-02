@@ -32,7 +32,7 @@ namespace TheCapital
             Initialize();
             // Setup capital center
             var capitalCenter = WorldObjectMaker.MakeWorldObject(_centerDef);
-            capitalCenter.Tile = TileFinder.RandomFactionBaseTileFor(null);
+            capitalCenter.Tile = TileFinder.RandomSettlementTileFor(null);
             _capitalWorldObjs.Add(capitalCenter);
 
             MapSurroundings(capitalCenter.Tile);
@@ -48,6 +48,8 @@ namespace TheCapital
                 Find.World.worldObjects.Add(worldObj);
             }
         }
+
+        public override int SeedPart { get; }
 
         private void Initialize()
         {

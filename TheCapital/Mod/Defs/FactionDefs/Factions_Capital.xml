@@ -9,7 +9,9 @@
     <requiredCountAtGameStart>1</requiredCountAtGameStart>
     <fixedName>The Capital</fixedName>
     <techLevel>Industrial</techLevel>
-    <backstoryCategory>Civil</backstoryCategory>
+    <backstoryCategories>
+        <li>Civil</li>
+    </backstoryCategories>
     <hidden>true</hidden>
     <rescueesCanJoin>true</rescueesCanJoin>
     <autoFlee>false</autoFlee>

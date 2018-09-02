@@ -15,7 +15,7 @@ namespace TheCapital.Dialogs
                 if (WorldRendererUtility.WorldRenderedNow)
                 {
                     // Options visible on world map
-                } else if (Find.VisibleMap != null)
+                } else if (Find.CurrentMap != null)
                 {
                     // Options visible on generated map
                     DoListingItems_Map();
@@ -35,7 +35,7 @@ namespace TheCapital.Dialogs
             {
                 var actorDef = DefDatabase<ThingDef>.GetNamed("TransportHelicopter");
                 var thing = ThingMaker.MakeThing(actorDef);
-                GenSpawn.Spawn(thing, UI.MouseCell(), Find.VisibleMap);
+                GenSpawn.Spawn(thing, UI.MouseCell(), Find.CurrentMap);
             });
         }
     }
