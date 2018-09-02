@@ -49,9 +49,12 @@
   <ItemGroup>
     <Compile Include="Hooks.cs" />
     <Compile Include="Source\Actor.cs" />
+    <Compile Include="Source\Comps\CompMotorized.cs" />
+    <Compile Include="Source\Comps\CompProperties_Motorized.cs" />
     <Compile Include="Source\Dialogs\DevToolOpener.cs" />
     <Compile Include="Source\Dialogs\Dialog_DevTool.cs" />
     <Compile Include="Source\Patches\UIRoot_Patch.cs" />
+    <Compile Include="Source\Vehicule.cs" />
     <Compile Include="TheCapitalMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\CapitalsManager.cs" />
