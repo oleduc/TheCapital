@@ -9,11 +9,20 @@ The capital is a Rimworld mod that aims to expand on the game's politics and pow
 ## Features
 - [X] Adds a special powerful faction in the map
 - [X] Adds a massive city to the world map
+- [X] Adds roads and tiles of to the world map
+
+## In development
+- [ ] Adds air vehicles that the capital uses to dominate the planet
+- [ ] Local maps for each tile type that the player can attack
+
+## Planned
+- [ ] A tracker that takes in account what ressources the capital has to derive its power
 - [ ] Adds special power weapons
-- [ ] Adds vehicles the capital uses to dominate the planet
 - [ ] Systematically subjugate nearby settlements
-- [ ] Interact with the player's settlement
-- [ ] Reacts to world event
+- [ ] Interact with the player's settlement (Inspections, atrocities, occupation, artillery attacks, diplomacy)
+- [ ] Reacts to world event (May start expanding, may start attacking settlements, may start trying to wipe out a faction)
+- [ ] A custom interaction dialog for advanced faction interactions
+
 
 ## Contributing
 
