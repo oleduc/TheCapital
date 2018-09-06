@@ -33,7 +33,7 @@ namespace TheCapital.Dialogs
             DoLabel("Spawning");
             DebugAction("Spawn Transport Helicopter", () =>
             {
-                var actorDef = DefDatabase<ThingDef>.GetNamed("TransportHelicopter");
+                var actorDef = DefDatabase<ThingDef>.GetNamed("ParkedTransportHelicopter");
                 var thing = ThingMaker.MakeThing(actorDef);
                 GenSpawn.Spawn(thing, UI.MouseCell(), Find.CurrentMap);
             });

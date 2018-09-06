@@ -1,39 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-    <ThingDef Name="VehicleBase" Abstract="True">
-        <thingClass>TheCapital.Actor</thingClass>
-        <category>Actor</category>
+
+    <ThingDef ParentName="BaseVehicle">
+        <defName>TransportHelicopter</defName>
+        <thingClass>TheCapital.Vehicle</thingClass>
+        <category>Pawn</category>
         <selectable>true</selectable>
         <tickerType>Normal</tickerType>
         <altitudeLayer>Pawn</altitudeLayer>
         <useHitPoints>false</useHitPoints>
         <hasTooltip>true</hasTooltip>
-        <soundImpactDefault>BulletImpactFlesh</soundImpactDefault>
+        <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+        <statBases>
+            <Mass>70</Mass>
+        </statBases>
+        <inspectorTabs>
+            <li>ITab_Pawn_Log</li>
+        </inspectorTabs>
+        <comps>
+            <li>
+                <compClass>CompAttachBase</compClass>
+            </li>
+        </comps>
         <drawGUIOverlay>true</drawGUIOverlay>
     </ThingDef>
-
-    <ThingDef ParentName="VehicleBase">
-        <defName>TransportHelicopter</defName>
-        <label>transport helicopter</label>
+    
+    <ThingDef ParentName="ParkedVehicleBase">
+        <defName>ParkedTransportHelicopter</defName>
+        <label>Parked transport helicopter</label>
         <category>Item</category>
         <scatterableOnMapGen>false</scatterableOnMapGen>
         <tickerType>Normal</tickerType>
         <graphicData>
-            <texPath>Things/Special/DropPod</texPath>
+            <texPath>Things/Building/Power/WoodFiredGenerator</texPath>
             <graphicClass>Graphic_Single</graphicClass>
-            <drawSize>1.9</drawSize>
+            <drawSize>(2,2)</drawSize>
             <shadowData>
-                <volume>(0.8, 0.6, 0.8)</volume>
+                <volume>(1.93,1,1.69)</volume>
+                <offset>(-0.03,0,-0.1)</offset>
             </shadowData>
         </graphicData>
         <altitudeLayer>Building</altitudeLayer>
-        <blockWind>true</blockWind>
+        <blockWind>false</blockWind>
+        <rotatable>false</rotatable>
         <useHitPoints>true</useHitPoints>
         <statBases>
-            <MaxHitPoints>500</MaxHitPoints>
-            <Flammability>0</Flammability>
+            <MaxHitPoints>1500</MaxHitPoints>
+            <WorkToBuild>2500</WorkToBuild>
+            <Flammability>1.0</Flammability>
+            <Beauty>-20</Beauty>
         </statBases>
-        <selectable>true</selectable>
+        <canOverlapZones>false</canOverlapZones>
+        <size>(2,2)</size>
+        <costList>
+            <Steel>10000</Steel>
+            <ComponentIndustrial>500</ComponentIndustrial>
+        </costList>
+        <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+        <designationHotKey>Misc3</designationHotKey>
+        <constructEffect>ConstructMetal</constructEffect>
+        <researchPrerequisites>
+            <li>Electricity</li>
+        </researchPrerequisites>
+        <constructionSkillPrerequisite>18</constructionSkillPrerequisite>
         <comps>
             <li Class="TheCapital.Comps.CompProperties_Motorized" />
             <li Class="CompProperties_Refuelable">
