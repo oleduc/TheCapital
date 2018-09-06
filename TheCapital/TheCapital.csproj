@@ -56,11 +56,13 @@
     <Compile Include="Source\Dialogs\DevToolOpener.cs" />
     <Compile Include="Source\Dialogs\Dialog_DevTool.cs" />
     <Compile Include="Source\Graphics\ActorDamageFlasher.cs" />
+    <Compile Include="Source\Graphics\ActorTweener.cs" />
     <Compile Include="Source\Graphics\VehicleGraphicSet.cs" />
     <Compile Include="Source\Graphics\VehicleRenderer.cs" />
     <Compile Include="Source\Graphics\ConditionDrawMode.cs" />
+    <Compile Include="Source\IA\ActorPathFollower.cs" />
     <Compile Include="Source\Patches\UIRoot_Patch.cs" />
-    <Compile Include="Source\Trackers\ActorDrawTracker.cs" />
+    <Compile Include="Source\Trackers\VehicleDrawTracker.cs" />
     <Compile Include="Source\Trackers\VehicleStoryTracker.cs" />
     <Compile Include="Source\Vehicle.cs" />
     <Compile Include="TheCapitalMod.cs" />
