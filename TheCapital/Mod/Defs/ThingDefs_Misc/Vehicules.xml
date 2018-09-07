@@ -9,7 +9,7 @@
         <altitudeLayer>Pawn</altitudeLayer>
         <useHitPoints>false</useHitPoints>
         <hasTooltip>true</hasTooltip>
-        <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+        <soundImpactDefault>BulletImpact_Flesh</soundImpactDefault>
         <statBases>
             <Mass>70</Mass>
         </statBases>
