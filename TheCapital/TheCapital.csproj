@@ -48,22 +48,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Hooks.cs" />
-    <Compile Include="Source\Actor.cs" />
+    <Compile Include="Source\ActorFramework\Actor.cs" />
+    <Compile Include="Source\ActorFramework\DeadActor.cs" />
+    <Compile Include="Source\ActorFramework\Graphics\ActorDamageFlasher.cs" />
+    <Compile Include="Source\ActorFramework\Graphics\ActorGraphicSet.cs" />
+    <Compile Include="Source\ActorFramework\Graphics\ActorRenderer.cs" />
+    <Compile Include="Source\ActorFramework\Graphics\ActorTweener.cs" />
+    <Compile Include="Source\ActorFramework\Graphics\ConditionDrawMode.cs" />
+    <Compile Include="Source\ActorFramework\IA\ActorGenPath.cs" />
+    <Compile Include="Source\ActorFramework\IA\ActorPath.cs" />
+    <Compile Include="Source\ActorFramework\IA\ActorPathFollower.cs" />
+    <Compile Include="Source\ActorFramework\IA\ActorPathPool.cs" />
+    <Compile Include="Source\ActorFramework\Misc\ActorReachabilityImmegiate.cs" />
+    <Compile Include="Source\ActorFramework\Trackers\ActorDrawTracker.cs" />
+    <Compile Include="Source\ActorFramework\Trackers\VehicleStoryTracker.cs" />
+    <Compile Include="Source\ActorFramework\Utilities\ActorConverter.cs" />
     <Compile Include="Source\Comps\CompMotorized.cs" />
     <Compile Include="Source\Comps\CompProperties_Motorized.cs" />
-    <Compile Include="Source\DeadActor.cs" />
     <Compile Include="Source\Defs\BodyTypeDef.cs" />
     <Compile Include="Source\Dialogs\DevToolOpener.cs" />
     <Compile Include="Source\Dialogs\Dialog_DevTool.cs" />
-    <Compile Include="Source\Graphics\ActorDamageFlasher.cs" />
-    <Compile Include="Source\Graphics\ActorTweener.cs" />
-    <Compile Include="Source\Graphics\VehicleGraphicSet.cs" />
-    <Compile Include="Source\Graphics\VehicleRenderer.cs" />
-    <Compile Include="Source\Graphics\ConditionDrawMode.cs" />
-    <Compile Include="Source\IA\ActorPathFollower.cs" />
     <Compile Include="Source\Patches\UIRoot_Patch.cs" />
-    <Compile Include="Source\Trackers\VehicleDrawTracker.cs" />
-    <Compile Include="Source\Trackers\VehicleStoryTracker.cs" />
     <Compile Include="Source\Vehicle.cs" />
     <Compile Include="TheCapitalMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,19 +5,19 @@ using Verse;
 
 namespace TheCapital
 {
-public class VehicleGraphicSet
+public class ActorGraphicSet
   {
     private List<Material> cachedMatsBodyBase = new List<Material>();
     private int cachedMatsBodyBaseHash = -1;
-    public Vehicle vehicle;
+    public Actor actor;
     public Graphic bodyGraphic;
     public ActorDamageFlasher flasher;
 
 
-    public VehicleGraphicSet(Vehicle vehicle)
+    public ActorGraphicSet(Actor actor)
     {
-      this.vehicle = vehicle;
-      flasher = new ActorDamageFlasher(vehicle);
+      this.actor = actor;
+      flasher = new ActorDamageFlasher(actor);
     }
 
     public bool AllResolved => bodyGraphic != null;
@@ -61,7 +61,7 @@ public class VehicleGraphicSet
     public void ResolveAllGraphics()
     {
       ClearCache();
-      GraphicDatabase.Get<Graphic_Multi>(vehicle.story.bodyType.bodyGraphicPath, ShaderDatabase.CutoutSkin, Vector2.one, vehicle.story.bodyColor);
+      //GraphicDatabase.Get<Graphic_Multi>(actor.story.bodyType.bodyGraphicPath, ShaderDatabase.CutoutSkin, Vector2.one, vehicle.story.bodyColor);
     }
   }
 }

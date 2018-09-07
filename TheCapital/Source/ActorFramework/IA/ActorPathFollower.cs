@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using RimWorld;
+using TheCapital.Misc;
+using TheCapital.Utilities;
 using UnityEngine;
 using Verse;
 using Verse.AI;
@@ -21,7 +23,7 @@ public class Pawn_PathFollower : IExposable
     private int cellsUntilClamor;
     private LocalTargetInfo destination;
     private PathEndMode peMode;
-    public PawnPath curPath;
+    public ActorPath curPath;
     public IntVec3 lastPathedTargetPosition;
     private const int MaxMoveTicks = 450;
     private const int MaxCheckAheadNodes = 20;
@@ -38,21 +40,9 @@ public class Pawn_PathFollower : IExposable
       actor = newPawn;
     }
 
-    public LocalTargetInfo Destination
-    {
-      get
-      {
-        return destination;
-      }
-    }
+    public LocalTargetInfo Destination => destination;
 
-    public bool Moving
-    {
-      get
-      {
-        return moving;
-      }
-    }
+    public bool Moving => moving;
 
     public bool MovingNow
     {
@@ -100,7 +90,7 @@ public class Pawn_PathFollower : IExposable
 
     public void StartPath(LocalTargetInfo dest, PathEndMode peMode)
     {
-      dest = (LocalTargetInfo) GenPath.ResolvePathMode(actor, dest.ToTargetInfo(actor.Map), ref peMode);
+      dest = (LocalTargetInfo) ActorGenPath.ResolvePathMode(actor, dest.ToTargetInfo(actor.Map), ref peMode);
       if (dest.HasThing && dest.ThingDestroyed)
       {
         Log.Error(actor + " pathing to destroyed thing " + dest.Thing, false);
@@ -120,22 +110,16 @@ public class Pawn_PathFollower : IExposable
           destination = dest;
           if (!IsNextCellWalkable() || NextCellDoorToManuallyOpen() != null || nextCellCostLeft == (double) nextCellCostTotal)
             ResetToCurrentPosition();
-          if (!destination.HasThing && actor.Map.pawnDestinationReservationManager.MostRecentReservationFor(actor) != destination.Cell)
-            actor.Map.pawnDestinationReservationManager.ObsoleteAllClaimedBy(actor);
+          if (!destination.HasThing && actor.Map.pawnDestinationReservationManager.MostRecentReservationFor(ActorConverter.ActorToPawn(actor)) != destination.Cell)
+            actor.Map.pawnDestinationReservationManager.ObsoleteAllClaimedBy(ActorConverter.ActorToPawn(actor));
           if (AtDestinationPosition())
             PatherArrived();
-          else if (actor.Downed)
-          {
-            Log.Error(actor.LabelCap + " tried to path while downed. This should never happen. curJob=" + actor.CurJob.ToStringSafe<Job>(), false);
-            PatherFailed();
-          }
           else
           {
             if (curPath != null)
               curPath.ReleaseToPool();
             curPath = null;
             moving = true;
-            actor.jobs.posture = PawnPosture.Standing;
           }
         }
       }
@@ -152,62 +136,17 @@ public class Pawn_PathFollower : IExposable
 
     public void PatherTick()
     {
-      if (WillCollideWithPawnAt(this.actor.Position))
+      lastMovedTick = Find.TickManager.TicksGame;
+      
+      if (nextCellCostLeft > 0.0)
       {
-        if (FailedToFindCloseUnoccupiedCellRecently())
-          return;
-        IntVec3 cell;
-        if (CellFinder.TryFindBestPawnStandCell(actor, out cell, true) && cell != actor.Position)
-        {
-          actor.Position = cell;
-          ResetToCurrentPosition();
-          if (!moving || !TrySetNewPath())
-            return;
-          TryEnterNextPathCell();
-        }
-        else
-          failedToFindCloseUnoccupiedCellTicks = Find.TickManager.TicksGame;
+        nextCellCostLeft -= CostToPayThisTick();
       }
       else
       {
-        if (this.actor.stances.FullBodyBusy)
+        if (!moving)
           return;
-        if (moving && WillCollideWithPawnOnNextPathCell())
-        {
-          nextCellCostLeft = nextCellCostTotal;
-          if ((curPath != null && curPath.NodesLeftCount < 30 || PawnUtility.AnyPawnBlockingPathAt(nextCell, this.actor, false, true, false)) && (!BestPathHadPawnsInTheWayRecently() && TrySetNewPath()))
-          {
-            ResetToCurrentPosition();
-            TryEnterNextPathCell();
-          }
-          else
-          {
-            if (Find.TickManager.TicksGame - lastMovedTick < 180)
-              return;
-            Actor actor = PawnUtility.PawnBlockingPathAt(nextCell, this.actor, false, false, false);
-            if (actor == null || !this.actor.HostileTo(actor) || this.actor.TryGetAttackVerb((Thing) actor, false) == null)
-              return;
-            this.actor.jobs.StartJob(new Job(JobDefOf.AttackMelee, (LocalTargetInfo) actor)
-            {
-              maxNumMeleeAttacks = 1,
-              expiryInterval = 300
-            }, JobCondition.Incompletable, (ThinkNode) null, false, true, (ThinkTreeDef) null, new JobTag?(), false);
-          }
-        }
-        else
-        {
-          lastMovedTick = Find.TickManager.TicksGame;
-          if (nextCellCostLeft > 0.0)
-          {
-            nextCellCostLeft -= CostToPayThisTick();
-          }
-          else
-          {
-            if (!moving)
-              return;
-            TryEnterNextPathCell();
-          }
-        }
+        TryEnterNextPathCell();
       }
     }
 
@@ -235,21 +174,12 @@ public class Pawn_PathFollower : IExposable
     {
       if (!c.Walkable(actor.Map))
         return false;
-      Building edifice = c.GetEdifice(actor.Map);
-      if (edifice != null)
-      {
-        Building_Door buildingDoor = edifice as Building_Door;
-        if (buildingDoor != null && !buildingDoor.PawnCanOpen(actor) && !buildingDoor.Open)
-          return false;
-      }
+
       return true;
     }
 
     public Building BuildingBlockingNextPathCell()
     {
-      Building edifice = nextCell.GetEdifice(actor.Map);
-      if (edifice != null && edifice.BlocksPawn(actor))
-        return edifice;
       return null;
     }
 
@@ -260,21 +190,16 @@ public class Pawn_PathFollower : IExposable
 
     private bool IsNextCellWalkable()
     {
-      return nextCell.Walkable(actor.Map) && !WillCollideWithPawnAt(nextCell);
+      return nextCell.Walkable(actor.Map);
     }
 
     private bool WillCollideWithPawnAt(IntVec3 c)
     {
-      if (!PawnUtility.ShouldCollideWithPawns(actor))
-        return false;
-      return PawnUtility.AnyPawnBlockingPathAt(c, actor, false, false, false);
+      return false;
     }
 
     public Building_Door NextCellDoorToManuallyOpen()
     {
-      Building_Door buildingDoor = actor.Map.thingGrid.ThingAt<Building_Door>(nextCell);
-      if (buildingDoor != null && buildingDoor.SlowsPawns && (!buildingDoor.Open && buildingDoor.PawnCanOpen(actor)))
-        return buildingDoor;
       return null;
     }
 
@@ -319,79 +244,26 @@ public class Pawn_PathFollower : IExposable
     private void PatherArrived()
     {
       StopDead();
-      if (actor.jobs.curJob == null)
-        return;
-      actor.jobs.curDriver.Notify_PatherArrived();
     }
 
     private void PatherFailed()
     {
       StopDead();
-      actor.jobs.curDriver.Notify_PatherFailed();
     }
 
     private void TryEnterNextPathCell()
     {
-      Building building = BuildingBlockingNextPathCell();
-      if (building != null)
-      {
-        Building_Door buildingDoor = building as Building_Door;
-        if (buildingDoor == null || !buildingDoor.FreePassage)
-        {
-          if (actor.CurJob != null && actor.CurJob.canBash || actor.HostileTo(building))
-          {
-            actor.jobs.StartJob(new Job(JobDefOf.AttackMelee, (LocalTargetInfo) building)
-            {
-              expiryInterval = 300
-            }, JobCondition.Incompletable, (ThinkNode) null, false, true, (ThinkTreeDef) null, new JobTag?(), false);
-            return;
-          }
-          PatherFailed();
-          return;
-        }
-      }
-      Building_Door manuallyOpen = NextCellDoorToManuallyOpen();
-      if (manuallyOpen != null)
-      {
-        Stance_Cooldown stanceCooldown = new Stance_Cooldown(manuallyOpen.TicksToOpenNow, (LocalTargetInfo) manuallyOpen, null);
-        stanceCooldown.neverAimWeapon = true;
-        actor.stances.SetStance((Stance) stanceCooldown);
-        manuallyOpen.StartManualOpenBy(actor);
-        manuallyOpen.CheckFriendlyTouched(actor);
-      }
+      lastCell = actor.Position;
+      actor.Position = nextCell;
+      
+      if (NeedNewPath() && !TrySetNewPath())
+        return;
+      
+      if (AtDestinationPosition())
+        PatherArrived();
       else
-      {
-        lastCell = actor.Position;
-        actor.Position = nextCell;
-        if (actor.RaceProps.Humanlike)
-        {
-          --cellsUntilClamor;
-          if (cellsUntilClamor <= 0)
-          {
-            GenClamor.DoClamor(actor, 7f, ClamorDefOf.Movement);
-            cellsUntilClamor = 12;
-          }
-        }
-        actor.filth.Notify_EnteredNewCell();
-        if ((double) actor.BodySize > 0.899999976158142)
-          actor.Map.snowGrid.AddDepth(actor.Position, -1f / 1000f);
-        Building_Door buildingDoor = actor.Map.thingGrid.ThingAt<Building_Door>(lastCell);
-        if (buildingDoor != null && !actor.HostileTo(buildingDoor))
-        {
-          buildingDoor.CheckFriendlyTouched(actor);
-          if (!buildingDoor.BlockedOpenMomentary && !buildingDoor.HoldOpen && (buildingDoor.SlowsPawns && buildingDoor.PawnCanOpen(actor)))
-          {
-            buildingDoor.StartManualCloseBy(actor);
-            return;
-          }
-        }
-        if (NeedNewPath() && !TrySetNewPath())
-          return;
-        if (AtDestinationPosition())
-          PatherArrived();
-        else
-          SetupMoveIntoNextCell();
-      }
+        SetupMoveIntoNextCell();
+      
     }
 
     private void SetupMoveIntoNextCell()
@@ -420,47 +292,10 @@ public class Pawn_PathFollower : IExposable
     private static int CostToMoveIntoCell(Actor actor, IntVec3 c)
     {
       int a = (c.x == actor.Position.x || c.z == actor.Position.z ? actor.TicksPerMoveCardinal : actor.TicksPerMoveDiagonal) + actor.Map.pathGrid.CalculatedCostAt(c, false, actor.Position);
-      Building edifice = c.GetEdifice(actor.Map);
-      if (edifice != null)
-        a += edifice.PathWalkCostFor(actor);
+      
       if (a > 450)
         a = 450;
-      if (actor.CurJob != null)
-      {
-        Actor locomotionUrgencySameAs = actor.jobs.curDriver.locomotionUrgencySameAs;
-        if (locomotionUrgencySameAs != null && locomotionUrgencySameAs != actor && locomotionUrgencySameAs.Spawned)
-        {
-          int moveIntoCell = CostToMoveIntoCell(locomotionUrgencySameAs, c);
-          if (a < moveIntoCell)
-            a = moveIntoCell;
-        }
-        else
-        {
-          switch (actor.jobs.curJob.locomotionUrgency)
-          {
-            case LocomotionUrgency.Amble:
-              a *= 3;
-              if (a < 60)
-              {
-                a = 60;
-              }
-              break;
-            case LocomotionUrgency.Walk:
-              a *= 2;
-              if (a < 50)
-              {
-                a = 50;
-              }
-              break;
-            case LocomotionUrgency.Jog:
-              a = a;
-              break;
-            case LocomotionUrgency.Sprint:
-              a = Mathf.RoundToInt(a * 0.75f);
-              break;
-          }
-        }
-      }
+
       return Mathf.Max(a, 1);
     }
 
@@ -474,29 +309,23 @@ public class Pawn_PathFollower : IExposable
 
     private bool TrySetNewPath()
     {
-      PawnPath newPath = GenerateNewPath();
+      ActorPath newPath = GenerateNewPath();
+      
       if (!newPath.Found)
       {
         PatherFailed();
         return false;
       }
+      
       if (curPath != null)
         curPath.ReleaseToPool();
+      
       curPath = newPath;
-      for (int nodesAhead = 0; nodesAhead < 20 && nodesAhead < curPath.NodesLeftCount; ++nodesAhead)
-      {
-        IntVec3 c = curPath.Peek(nodesAhead);
-        if (PawnUtility.ShouldCollideWithPawns(actor) && PawnUtility.AnyPawnBlockingPathAt(c, actor, false, false, false))
-          foundPathWhichCollidesWithPawns = Find.TickManager.TicksGame;
-        if (PawnUtility.KnownDangerAt(c, actor.Map, actor))
-          foundPathWithDanger = Find.TickManager.TicksGame;
-        if (foundPathWhichCollidesWithPawns == Find.TickManager.TicksGame && foundPathWithDanger == Find.TickManager.TicksGame)
-          break;
-      }
+
       return true;
     }
 
-    private PawnPath GenerateNewPath()
+    private ActorPath GenerateNewPath()
     {
       lastPathedTargetPosition = destination.Cell;
       return actor.Map.pathFinder.FindPath(actor.Position, destination, actor, peMode);
@@ -504,6 +333,7 @@ public class Pawn_PathFollower : IExposable
 
     private bool AtDestinationPosition()
     {
+      
       return actor.CanReachImmediate(destination, peMode);
     }
 
@@ -518,19 +348,14 @@ public class Pawn_PathFollower : IExposable
         if ((lastPathedTargetPosition - destination.Cell).LengthHorizontalSquared > num * (double) num)
           return true;
       }
-      bool flag1 = PawnUtility.ShouldCollideWithPawns(actor);
-      bool flag2 = curPath.NodesLeftCount < 30;
-      IntVec3 other = IntVec3.Invalid;
+
       for (int nodesAhead = 0; nodesAhead < 20 && nodesAhead < curPath.NodesLeftCount; ++nodesAhead)
       {
         IntVec3 c = curPath.Peek(nodesAhead);
-        if (!c.Walkable(actor.Map) || flag1 && !BestPathHadPawnsInTheWayRecently() && (PawnUtility.AnyPawnBlockingPathAt(c, actor, false, true, false) || flag2 && PawnUtility.AnyPawnBlockingPathAt(c, actor, false, false, false)) || !BestPathHadDangerRecently() && PawnUtility.KnownDangerAt(c, actor.Map, actor))
+        if (!c.Walkable(actor.Map))
           return true;
-        Building_Door edifice = c.GetEdifice(actor.Map) as Building_Door;
-        if (edifice != null && (!edifice.CanPhysicallyPass(actor) && !actor.HostileTo(edifice) || edifice.IsForbiddenToPass(actor)) || nodesAhead != 0 && c.AdjacentToDiagonal(other) && (PathFinder.BlocksDiagonalMovement(c.x, other.z, actor.Map) || PathFinder.BlocksDiagonalMovement(other.x, c.z, actor.Map)))
-          return true;
-        other = c;
       }
+      
       return false;
     }
 
