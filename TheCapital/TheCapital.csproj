@@ -86,6 +86,7 @@
     <Content Include="Mod\Defs\ThingDefs_Misc\Vehicules.xml" />
     <Content Include="Mod\Defs\WorldGeneration\WorldGenerator.xml" />
     <Content Include="Mod\Defs\WorldObjectDefs\WorldObjects.xml" />
+    <Content Include="Mod\Textures\CapitalWorld\Things\Vehicles\Helicopter.png" />
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalCenter.png" />
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalFactory.png" />
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalFarm.png" />

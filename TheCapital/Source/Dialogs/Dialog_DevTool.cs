@@ -1,4 +1,6 @@
-﻿using RimWorld.Planet;
+﻿using System.Collections.Generic;
+using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace TheCapital.Dialogs
@@ -8,6 +10,7 @@ namespace TheCapital.Dialogs
         protected override void DoListingItems()
         {
             DoGap();
+            
             DoLabel("The Capital - Development tool");
             
             if (Current.ProgramState == ProgramState.Playing)
@@ -21,21 +24,23 @@ namespace TheCapital.Dialogs
                     DoListingItems_Map();
                 }
             }
-            else
-            {
-                // Options visible in menus when not in play
-            }
         }
 
         private void DoListingItems_Map()
         {
             Text.Font = GameFont.Tiny;
             DoLabel("Spawning");
-            DebugAction("Spawn Transport Helicopter", () =>
+            DebugAction("Parked vehicles", () =>
             {
-                var actorDef = DefDatabase<ThingDef>.GetNamed("ParkedTransportHelicopter");
-                var thing = ThingMaker.MakeThing(actorDef);
-                GenSpawn.Spawn(thing, UI.MouseCell(), Find.CurrentMap);
+                List<DebugMenuOption> debugMenuOptionList = new List<DebugMenuOption>();
+                debugMenuOptionList.Add(new DebugMenuOption("Transport Helicopter", DebugMenuOptionMode.Tool, () =>
+                {
+                    var actorDef = DefDatabase<ThingDef>.GetNamed("ParkedTransportHelicopter");
+                    var thing = ThingMaker.MakeThing(actorDef);
+                    Log.Message("WTF!");
+                    GenSpawn.Spawn(thing, UI.MouseCell(), Find.CurrentMap);
+                }));
+                Find.WindowStack.Add(new Dialog_DebugOptionListLister(debugMenuOptionList));
             });
         }
     }

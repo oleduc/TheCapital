@@ -41,13 +41,10 @@
     <ThingDef ParentName="ParkedVehicleBase">
         <defName>ParkedTransportHelicopter</defName>
         <label>Parked transport helicopter</label>
-        <category>Item</category>
-        <scatterableOnMapGen>false</scatterableOnMapGen>
-        <tickerType>Normal</tickerType>
         <graphicData>
-            <texPath>Things/Building/Power/WoodFiredGenerator</texPath>
+            <texPath>CapitalWorld/Things/Vehicles/Helicopter</texPath>
             <graphicClass>Graphic_Single</graphicClass>
-            <drawSize>(2,2)</drawSize>
+            <drawSize>(4,8)</drawSize>
             <shadowData>
                 <volume>(1.93,1,1.69)</volume>
                 <offset>(-0.03,0,-0.1)</offset>
@@ -55,7 +52,6 @@
         </graphicData>
         <altitudeLayer>Building</altitudeLayer>
         <blockWind>false</blockWind>
-        <rotatable>false</rotatable>
         <useHitPoints>true</useHitPoints>
         <statBases>
             <MaxHitPoints>1500</MaxHitPoints>
@@ -64,10 +60,10 @@
             <Beauty>-20</Beauty>
         </statBases>
         <canOverlapZones>false</canOverlapZones>
-        <size>(2,2)</size>
+        <size>(4,8)</size>
         <costList>
-            <Steel>10000</Steel>
-            <ComponentIndustrial>500</ComponentIndustrial>
+            <Steel>1</Steel>
+            <ComponentIndustrial>1</ComponentIndustrial>
         </costList>
         <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
         <designationHotKey>Misc3</designationHotKey>

@@ -27,15 +27,23 @@
     <ThingDef Name="ParkedVehicleBase" Abstract="True">
         <category>Building</category>
         <thingClass>Building</thingClass>
+        <tickerType>Normal</tickerType>
+        <scatterableOnMapGen>false</scatterableOnMapGen>
         <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
         <selectable>true</selectable>
+        <rotatable>true</rotatable>
         <drawerType>MapMeshAndRealTime</drawerType>
+        <passability>Impassable</passability>
         <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
         <repairEffect>Repair</repairEffect>
-        <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+        <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
         <filthLeaving>Filth_RubbleBuilding</filthLeaving>
         <statBases>
             <SellPriceFactor>0.1</SellPriceFactor>
         </statBases>
+        <building>
+            <claimable>true</claimable>
+            <expandHomeArea>false</expandHomeArea>
+        </building>
     </ThingDef>
 </Defs>
