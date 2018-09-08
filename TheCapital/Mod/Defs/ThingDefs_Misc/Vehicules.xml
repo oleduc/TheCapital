@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingDef Name="BaseVehicle" Abstract="True">
+        <thingClass>TheCapital.Vehicle</thingClass>
+        <category>Pawn</category>
+        <selectable>true</selectable>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>Pawn</altitudeLayer>
+        <useHitPoints>false</useHitPoints>
+        <hasTooltip>true</hasTooltip>
+        <soundImpactDefault>BulletImpact_Flesh</soundImpactDefault>
+        <statBases>
+            <Mass>70</Mass>
+        </statBases>
+        <inspectorTabs>
+            <li>ITab_Pawn_Log</li>
+        </inspectorTabs>
+        <comps>
+            <li>
+                <compClass>CompAttachBase</compClass>
+            </li>
+        </comps>
+        <drawGUIOverlay>true</drawGUIOverlay>
+    </ThingDef>
+
+    <ThingDef Name="ParkedVehicleBase" Abstract="True">
+        <category>Building</category>
+        <thingClass>Building</thingClass>
+        <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+        <selectable>true</selectable>
+        <drawerType>MapMeshAndRealTime</drawerType>
+        <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+        <repairEffect>Repair</repairEffect>
+        <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+        <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+        <statBases>
+            <SellPriceFactor>0.1</SellPriceFactor>
+        </statBases>
+    </ThingDef>
+</Defs>

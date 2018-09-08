@@ -1,39 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-    <ThingDef Name="VehicleBase" Abstract="True">
-        <thingClass>TheCapital.Actor</thingClass>
-        <category>Actor</category>
-        <selectable>true</selectable>
-        <tickerType>Normal</tickerType>
-        <altitudeLayer>Pawn</altitudeLayer>
-        <useHitPoints>false</useHitPoints>
-        <hasTooltip>true</hasTooltip>
-        <soundImpactDefault>BulletImpactFlesh</soundImpactDefault>
-        <drawGUIOverlay>true</drawGUIOverlay>
-    </ThingDef>
-
-    <ThingDef ParentName="VehicleBase">
+    
+    <ThingDef ParentName="BaseVehicle">
         <defName>TransportHelicopter</defName>
-        <label>transport helicopter</label>
+        <label>transportHelicopter</label>
+        <description>A baseline human, mostly unmodified by gene engineering and mostly unchanged by evolutionary pressures on non-Earth planets.</description>
+        <statBases>
+            <MarketValue>1750</MarketValue>
+            <MoveSpeed>4.6</MoveSpeed>
+            <Flammability>1.0</Flammability>
+            <ComfyTemperatureMin>16</ComfyTemperatureMin>
+            <ComfyTemperatureMax>26</ComfyTemperatureMax>
+            <LeatherAmount>50</LeatherAmount>
+        </statBases>
+        <race>
+            <intelligence>ToolUser</intelligence>
+            <thinkTreeMain>Mechanoid</thinkTreeMain>
+            <body>MechanicalCentipede</body>
+            <baseBodySize>2.0</baseBodySize>
+            <baseHealthScale>4.32</baseHealthScale>
+            <lifeStageAges>
+                <li>
+                    <def>MechanoidFullyFormed</def>
+                    <minAge>0</minAge>
+                    <soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+                    <soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+                    <soundCall>Pawn_Mech_Centipede_Call</soundCall>
+                </li>
+            </lifeStageAges>
+            <soundCallIntervalRange>
+                <min>1000</min>
+                <max>2000</max>
+            </soundCallIntervalRange>
+            <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+            <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+            <soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+        </race>
+    </ThingDef>
+    
+    <ThingDef ParentName="ParkedVehicleBase">
+        <defName>ParkedTransportHelicopter</defName>
+        <label>Parked transport helicopter</label>
         <category>Item</category>
         <scatterableOnMapGen>false</scatterableOnMapGen>
         <tickerType>Normal</tickerType>
         <graphicData>
-            <texPath>Things/Special/DropPod</texPath>
+            <texPath>Things/Building/Power/WoodFiredGenerator</texPath>
             <graphicClass>Graphic_Single</graphicClass>
-            <drawSize>1.9</drawSize>
+            <drawSize>(2,2)</drawSize>
             <shadowData>
-                <volume>(0.8, 0.6, 0.8)</volume>
+                <volume>(1.93,1,1.69)</volume>
+                <offset>(-0.03,0,-0.1)</offset>
             </shadowData>
         </graphicData>
         <altitudeLayer>Building</altitudeLayer>
-        <blockWind>true</blockWind>
+        <blockWind>false</blockWind>
+        <rotatable>false</rotatable>
         <useHitPoints>true</useHitPoints>
         <statBases>
-            <MaxHitPoints>500</MaxHitPoints>
-            <Flammability>0</Flammability>
+            <MaxHitPoints>1500</MaxHitPoints>
+            <WorkToBuild>2500</WorkToBuild>
+            <Flammability>1.0</Flammability>
+            <Beauty>-20</Beauty>
         </statBases>
-        <selectable>true</selectable>
+        <canOverlapZones>false</canOverlapZones>
+        <size>(2,2)</size>
+        <costList>
+            <Steel>10000</Steel>
+            <ComponentIndustrial>500</ComponentIndustrial>
+        </costList>
+        <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+        <designationHotKey>Misc3</designationHotKey>
+        <constructEffect>ConstructMetal</constructEffect>
+        <researchPrerequisites>
+            <li>Electricity</li>
+        </researchPrerequisites>
+        <constructionSkillPrerequisite>18</constructionSkillPrerequisite>
         <comps>
             <li Class="TheCapital.Comps.CompProperties_Motorized" />
             <li Class="CompProperties_Refuelable">
