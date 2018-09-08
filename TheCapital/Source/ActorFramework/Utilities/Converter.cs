@@ -1,8 +1,11 @@
-﻿using Verse;
+﻿using System;
+using TheCapital.IA;
+using Verse;
+using Verse.AI;
 
 namespace TheCapital.Utilities
 {
-    public static class ActorConverter
+    public static class Converter
      {
          public static Pawn ActorToPawn(Actor actor)
          {
@@ -11,6 +14,12 @@ namespace TheCapital.Utilities
 
              
              return (Pawn) (ThingWithComps) actor;
+         }
+         
+         public static ActorPath PawnPathToActorPath(PawnPath pawnPath)
+         {
+             throw new NotImplementedException();
+             return null;
          }
      }
  }

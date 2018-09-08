@@ -52,8 +52,10 @@
     <Compile Include="Source\ActorFramework\DeadActor.cs" />
     <Compile Include="Source\ActorFramework\Graphics\ActorDamageFlasher.cs" />
     <Compile Include="Source\ActorFramework\Graphics\ActorGraphicSet.cs" />
+    <Compile Include="Source\ActorFramework\Graphics\ActorLeaner.cs" />
     <Compile Include="Source\ActorFramework\Graphics\ActorRenderer.cs" />
     <Compile Include="Source\ActorFramework\Graphics\ActorTweener.cs" />
+    <Compile Include="Source\ActorFramework\Graphics\ActorUIOverlay.cs" />
     <Compile Include="Source\ActorFramework\Graphics\ConditionDrawMode.cs" />
     <Compile Include="Source\ActorFramework\IA\ActorGenPath.cs" />
     <Compile Include="Source\ActorFramework\IA\ActorPath.cs" />
@@ -62,7 +64,7 @@
     <Compile Include="Source\ActorFramework\Misc\ActorReachabilityImmegiate.cs" />
     <Compile Include="Source\ActorFramework\Trackers\ActorDrawTracker.cs" />
     <Compile Include="Source\ActorFramework\Trackers\VehicleStoryTracker.cs" />
-    <Compile Include="Source\ActorFramework\Utilities\ActorConverter.cs" />
+    <Compile Include="Source\ActorFramework\Utilities\Converter.cs" />
     <Compile Include="Source\Comps\CompMotorized.cs" />
     <Compile Include="Source\Comps\CompProperties_Motorized.cs" />
     <Compile Include="Source\Defs\BodyTypeDef.cs" />

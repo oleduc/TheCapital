@@ -57,13 +57,15 @@ namespace TheCapital
       if (!actor.Spawned)
         return actor.Position.ToVector3Shifted();
       float num = MovedPercent();
-      return actor.pather.nextCell.ToVector3Shifted() * num + actor.Position.ToVector3Shifted() * (1f - num) + PawnCollisionTweenerUtility.PawnCollisionPosOffsetFor(this.actor);
+      
+      return actor.pather.nextCell.ToVector3Shifted() * num + actor.Position.ToVector3Shifted() * (1f - num);
     }
 
     private float MovedPercent()
     {
-      if (!actor.pather.Moving || actor.stances.FullBodyBusy || (actor.pather.BuildingBlockingNextPathCell() != null || actor.pather.NextCellDoorToManuallyOpen() != null) || actor.pather.WillCollideWithPawnOnNextPathCell())
+      if (!actor.pather.Moving || actor.pather.WillCollideWithPawnOnNextPathCell())
         return 0.0f;
+      
       return (float) (1.0 - (double) actor.pather.nextCellCostLeft / (double) actor.pather.nextCellCostTotal);
     }
   }

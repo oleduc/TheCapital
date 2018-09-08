@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using RimWorld;
 using UnityEngine;
@@ -20,32 +18,32 @@ namespace TheCapital
 
     public DeadActor()
     {
-      this.operationsBillStack = new BillStack((IBillGiver) this);
-      this.innerContainer = new ThingOwner<Actor>((IThingHolder) this, true, LookMode.Reference);
+      operationsBillStack = new BillStack(this);
+      innerContainer = new ThingOwner<Actor>(this, true, LookMode.Reference);
     }
 
     public Actor InnerActor
     {
       get
       {
-        if (this.innerContainer.Count > 0)
-          return this.innerContainer[0];
-        return (Actor) null;
+        if (innerContainer.Count > 0)
+          return innerContainer[0];
+        return null;
       }
       set
       {
         if (value == null)
         {
-          this.innerContainer.Clear();
+          innerContainer.Clear();
         }
         else
         {
-          if (this.innerContainer.Count > 0)
+          if (innerContainer.Count > 0)
           {
             Log.Error("Setting InnerActor in corpse that already has one.", false);
-            this.innerContainer.Clear();
+            innerContainer.Clear();
           }
-          this.innerContainer.TryAdd((Thing) value, true);
+          innerContainer.TryAdd(value, true);
         }
       }
     }
@@ -54,11 +52,11 @@ namespace TheCapital
     {
       get
       {
-        return Find.TickManager.TicksGame - this.timeOfDeath;
+        return Find.TickManager.TicksGame - timeOfDeath;
       }
       set
       {
-        this.timeOfDeath = Find.TickManager.TicksGame - value;
+        timeOfDeath = Find.TickManager.TicksGame - value;
       }
     }
 
@@ -66,30 +64,30 @@ namespace TheCapital
     {
       get
       {
-        if (this.Bugged)
+        if (Bugged)
         {
           Log.ErrorOnce("Corpse.Label while Bugged", 57361644, false);
           return string.Empty;
         }
-        return "DeadLabel".Translate((object) this.InnerActor.Label);
+        return "DeadLabel".Translate((object) InnerActor.Label);
       }
     }
 
     public override bool IngestibleNow => false;
 
-    public RotDrawMode CurRotDrawMode
+    public ConditionDrawMode CurConditionDrawMode
     {
       get
       {
-        CompRottable comp = this.GetComp<CompRottable>();
+        CompRottable comp = GetComp<CompRottable>();
         if (comp != null)
         {
           if (comp.Stage == RotStage.Rotting)
-            return RotDrawMode.Rotting;
+            return ConditionDrawMode.Weathered;
           if (comp.Stage == RotStage.Dessicated)
-            return RotDrawMode.Dessicated;
+            return ConditionDrawMode.Damaged;
         }
-        return RotDrawMode.Fresh;
+        return ConditionDrawMode.Pristine;
       }
     }
 
@@ -230,7 +228,7 @@ namespace TheCapital
 
     public override void DrawAt(Vector3 drawLoc, bool flip = false)
     {
-      InnerActor.Drawer.renderer.RenderPawnAt(drawLoc);
+      InnerActor.Drawer.renderer.RenderActorAt(drawLoc);
     }
 
     public Thought_Memory GiveObservedThought()

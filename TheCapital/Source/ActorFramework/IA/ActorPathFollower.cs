@@ -8,7 +8,7 @@ using Verse.AI;
 
 namespace TheCapital.IA
 {
-public class Pawn_PathFollower : IExposable
+public class ActorPathFollower : IExposable
   {
     public float nextCellCostTotal = 1f;
     private int lastMovedTick = -999999;
@@ -35,7 +35,7 @@ public class Pawn_PathFollower : IExposable
     private const int CheckForMovingCollidingPawnsIfCloserToTargetThanX = 30;
     private const int AttackBlockingHostilePawnAfterTicks = 180;
 
-    public Pawn_PathFollower(Actor newPawn)
+    public ActorPathFollower(Actor newPawn)
     {
       actor = newPawn;
     }
@@ -110,8 +110,6 @@ public class Pawn_PathFollower : IExposable
           destination = dest;
           if (!IsNextCellWalkable() || NextCellDoorToManuallyOpen() != null || nextCellCostLeft == (double) nextCellCostTotal)
             ResetToCurrentPosition();
-          if (!destination.HasThing && actor.Map.pawnDestinationReservationManager.MostRecentReservationFor(ActorConverter.ActorToPawn(actor)) != destination.Cell)
-            actor.Map.pawnDestinationReservationManager.ObsoleteAllClaimedBy(ActorConverter.ActorToPawn(actor));
           if (AtDestinationPosition())
             PatherArrived();
           else
@@ -328,7 +326,9 @@ public class Pawn_PathFollower : IExposable
     private ActorPath GenerateNewPath()
     {
       lastPathedTargetPosition = destination.Cell;
-      return actor.Map.pathFinder.FindPath(actor.Position, destination, actor, peMode);
+      var pawnPath = actor.Map.pathFinder.FindPath(actor.Position, destination, Converter.ActorToPawn(actor), peMode);
+      
+      return Converter.PawnPathToActorPath(pawnPath);
     }
 
     private bool AtDestinationPosition()
@@ -339,7 +339,14 @@ public class Pawn_PathFollower : IExposable
 
     private bool NeedNewPath()
     {
-      if (!destination.IsValid || curPath == null || (!curPath.Found || curPath.NodesLeftCount == 0) || destination.HasThing && destination.Thing.Map != actor.Map || (actor.Position.InHorDistOf(curPath.LastNode, 15f) || actor.Position.InHorDistOf(destination.Cell, 15f)) && !ReachabilityImmediate.CanReachImmediate(curPath.LastNode, destination, actor.Map, peMode, actor) || curPath.UsedRegionHeuristics && curPath.NodesConsumedCount >= 75)
+      if (!destination.IsValid ||
+          curPath == null ||
+          (!curPath.Found || curPath.NodesLeftCount == 0) ||
+          destination.HasThing && destination.Thing.Map != actor.Map ||
+          (actor.Position.InHorDistOf(curPath.LastNode, 15f) ||
+           actor.Position.InHorDistOf(destination.Cell, 15f)) &&
+          !ActorReachabilityImmediate.CanReachImmediate(curPath.LastNode, destination, actor.Map, peMode, actor) ||
+          curPath.UsedRegionHeuristics && curPath.NodesConsumedCount >= 75)
         return true;
       if (lastPathedTargetPosition != destination.Cell)
       {
@@ -357,21 +364,6 @@ public class Pawn_PathFollower : IExposable
       }
       
       return false;
-    }
-
-    private bool BestPathHadPawnsInTheWayRecently()
-    {
-      return foundPathWhichCollidesWithPawns + 240 > Find.TickManager.TicksGame;
-    }
-
-    private bool BestPathHadDangerRecently()
-    {
-      return foundPathWithDanger + 240 > Find.TickManager.TicksGame;
-    }
-
-    private bool FailedToFindCloseUnoccupiedCellRecently()
-    {
-      return failedToFindCloseUnoccupiedCellTicks + 100 > Find.TickManager.TicksGame;
     }
   }
 }

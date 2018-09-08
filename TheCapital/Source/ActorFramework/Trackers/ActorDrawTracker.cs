@@ -9,11 +9,10 @@ namespace TheCapital.Trackers
     private Actor actor;
     public ActorTweener tweener;
     private JitterHandler jitterer;
-    public PawnLeaner leaner;
+    public ActorLeaner leaner;
     public ActorRenderer renderer;
-    public PawnUIOverlay ui;
-    private PawnFootprintMaker footprintMaker;
-    private PawnBreathMoteMaker breathMoteMaker;
+    public ActorUIOverlay ui;
+
     private const float MeleeJitterDistance = 0.5f;
 
     public ActorDrawTracker(Actor actor)
@@ -24,8 +23,6 @@ namespace TheCapital.Trackers
       leaner = new ActorLeaner(actor);
       renderer = new ActorRenderer(actor);
       ui = new ActorUIOverlay(actor);
-      footprintMaker = new ActorFootprintMaker(actor);
-      breathMoteMaker = new ActorBreathMoteMaker(actor);
     }
 
     public Vector3 DrawPos
@@ -44,8 +41,6 @@ namespace TheCapital.Trackers
       if (!actor.Spawned || Current.ProgramState == ProgramState.Playing && !Find.CameraDriver.CurrentViewRect.ExpandedBy(3).Contains(actor.Position))
         return;
       jitterer.JitterHandlerTick();
-      footprintMaker.FootprintMakerTick();
-      breathMoteMaker.BreathMoteMakerTick();
       leaner.LeanerTick();
       renderer.RendererTick();
     }
