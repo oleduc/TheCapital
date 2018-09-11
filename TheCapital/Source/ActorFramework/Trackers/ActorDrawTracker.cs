@@ -40,8 +40,8 @@ namespace TheCapital.Trackers
     {
       if (!actor.Spawned || Current.ProgramState == ProgramState.Playing && !Find.CameraDriver.CurrentViewRect.ExpandedBy(3).Contains(actor.Position))
         return;
-      jitterer.JitterHandlerTick();
-      leaner.LeanerTick();
+      //jitterer.JitterHandlerTick();
+      //leaner.LeanerTick();
       renderer.RendererTick();
     }
 

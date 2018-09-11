@@ -42,6 +42,11 @@ namespace TheCapital
     {
       if (!graphics.AllResolved)
         graphics.ResolveAllGraphics();
+      
+      Quaternion quaternion = Quaternion.AngleAxis(Rot4.South.AsAngle, Vector3.up);
+      var graphic = graphics.bodyGraphic.GetCopy(new Vector2(4,8));
+      var mesh1 = graphic.MeshAt(Rot4.South);
+      GenDraw.DrawMeshNowOrLater(mesh1,drawLoc,quaternion, graphic.MatSouth, false);
     }
 
     public void RenderPortrait()

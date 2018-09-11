@@ -63,7 +63,7 @@
     <Compile Include="Source\ActorFramework\IA\ActorPathPool.cs" />
     <Compile Include="Source\ActorFramework\Misc\ActorReachabilityImmegiate.cs" />
     <Compile Include="Source\ActorFramework\Trackers\ActorDrawTracker.cs" />
-    <Compile Include="Source\ActorFramework\Trackers\VehicleStoryTracker.cs" />
+    <Compile Include="Source\ActorFramework\Trackers\ActorStoryTracker.cs" />
     <Compile Include="Source\ActorFramework\Utilities\Converter.cs" />
     <Compile Include="Source\Comps\CompMotorized.cs" />
     <Compile Include="Source\Comps\CompProperties_Motorized.cs" />
@@ -86,6 +86,10 @@
     <Content Include="Mod\Defs\ThingDefs_Misc\Vehicules.xml" />
     <Content Include="Mod\Defs\WorldGeneration\WorldGenerator.xml" />
     <Content Include="Mod\Defs\WorldObjectDefs\WorldObjects.xml" />
+    <Content Include="Mod\Textures\CapitalWorld\Things\Vehicles\Helicopter_south.png" />
+    <Content Include="Mod\Textures\CapitalWorld\Things\Vehicles\Helicopter_north.png" />
+    <Content Include="Mod\Textures\CapitalWorld\Things\Vehicles\Helicopter_east.png" />
+    <Content Include="Mod\Textures\CapitalWorld\Things\Vehicles\Helicopter_west.png" />
     <Content Include="Mod\Textures\CapitalWorld\Things\Vehicles\Helicopter.png" />
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalCenter.png" />
     <Content Include="Mod\Textures\CapitalWorld\WorldObjects\CapitalFactory.png" />

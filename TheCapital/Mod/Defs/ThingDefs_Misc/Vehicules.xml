@@ -3,7 +3,7 @@
 
     <ThingDef Name="BaseVehicle" Abstract="True">
         <thingClass>TheCapital.Vehicle</thingClass>
-        <category>Pawn</category>
+        <category>None</category>
         <selectable>true</selectable>
         <tickerType>Normal</tickerType>
         <altitudeLayer>Pawn</altitudeLayer>

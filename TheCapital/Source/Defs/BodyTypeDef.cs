@@ -3,7 +3,7 @@ using Verse;
 
 namespace TheCapital.Defs
 {
-    public class BodyTypeDef
+    public class BodyTypeDef : Def
     {
         [NoTranslate]
         public string bodyGraphicPath;

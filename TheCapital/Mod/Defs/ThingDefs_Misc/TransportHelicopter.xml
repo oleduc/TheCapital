@@ -8,7 +8,7 @@
         <statBases>
             <MarketValue>1750</MarketValue>
             <MoveSpeed>4.6</MoveSpeed>
-            <Flammability>1.0</Flammability>
+            <Flammability>0</Flammability>
             <ComfyTemperatureMin>16</ComfyTemperatureMin>
             <ComfyTemperatureMax>26</ComfyTemperatureMax>
             <LeatherAmount>50</LeatherAmount>

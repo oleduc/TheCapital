@@ -30,14 +30,19 @@ namespace TheCapital.Dialogs
         {
             Text.Font = GameFont.Tiny;
             DoLabel("Spawning");
-            DebugAction("Parked vehicles", () =>
+            DebugAction("Vehicles", () =>
             {
                 List<DebugMenuOption> debugMenuOptionList = new List<DebugMenuOption>();
-                debugMenuOptionList.Add(new DebugMenuOption("Transport Helicopter", DebugMenuOptionMode.Tool, () =>
+                debugMenuOptionList.Add(new DebugMenuOption("Parked Transport Helicopter", DebugMenuOptionMode.Tool, () =>
                 {
                     var actorDef = DefDatabase<ThingDef>.GetNamed("ParkedTransportHelicopter");
                     var thing = ThingMaker.MakeThing(actorDef);
-                    Log.Message("WTF!");
+                    GenSpawn.Spawn(thing, UI.MouseCell(), Find.CurrentMap);
+                }));
+                debugMenuOptionList.Add(new DebugMenuOption("Transport Helicopter", DebugMenuOptionMode.Tool, () =>
+                {
+                    var actorDef = DefDatabase<ThingDef>.GetNamed("TransportHelicopter");
+                    var thing = ThingMaker.MakeThing(actorDef);
                     GenSpawn.Spawn(thing, UI.MouseCell(), Find.CurrentMap);
                 }));
                 Find.WindowStack.Add(new Dialog_DebugOptionListLister(debugMenuOptionList));

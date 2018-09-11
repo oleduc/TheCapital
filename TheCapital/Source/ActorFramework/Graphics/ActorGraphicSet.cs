@@ -61,7 +61,9 @@ public class ActorGraphicSet
     public void ResolveAllGraphics()
     {
       ClearCache();
-      //GraphicDatabase.Get<Graphic_Multi>(actor.story.bodyType.bodyGraphicPath, ShaderDatabase.CutoutSkin, Vector2.one, vehicle.story.bodyColor);
+      Log.Message("ResolveAllGraphics!");
+      bodyGraphic = GraphicDatabase.Get<Graphic_Multi>("CapitalWorld/Things/Vehicles/Helicopter", ShaderDatabase.CutoutSkin, Vector2.one, Color.blue);
+      Log.Message("Nay Crashed");
     }
   }
 }

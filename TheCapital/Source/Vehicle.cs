@@ -3,7 +3,7 @@ using Verse;
 
 namespace TheCapital
 {
-    public class Vehicle : Pawn
+    public class Vehicle : Actor
     {
 
     }

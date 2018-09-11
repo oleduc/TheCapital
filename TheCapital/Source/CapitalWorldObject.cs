@@ -17,7 +17,8 @@ namespace TheCapital
         {
             var options = new List<FloatMenuOption>
             {
-                new FloatMenuOption("Focken shieeett", new Action(() => { Log.Message("EAT SHIEEETT"); }))
+                new FloatMenuOption("Visit The Capital", () => {  }),
+                new FloatMenuOption("Attack The Capital", () => { Log.Message("Not yet implemented"); })
             };
             
             return options;

@@ -8,8 +8,8 @@ namespace TheCapital
 {
     public class Actor : ThingWithComps
     {
+        public ActorStoryTracker story;
         public ActorPathFollower pather;
-        
         private ActorDrawTracker drawer;
         public bool Disabled => false;
         
@@ -19,6 +19,34 @@ namespace TheCapital
 
         public override string LabelShort => "Actor Label";
 
+        public override void ExposeData()
+        {
+          base.ExposeData();
+            Log.Message("ExposeData of Actor!");
+          Scribe_Deep.Look(ref pather, "pather", (object) this);
+          Scribe_Deep.Look(ref story, "story", (object) this);
+          if (Scribe.mode != LoadSaveMode.PostLoadInit)
+            return;
+        }
+        
+        
+        
+        public override void Tick()
+        {
+            base.Tick();
+            bool suspended = Suspended;
+            if (!suspended)
+            {
+                if (Spawned)
+                    //pather.PatherTick();
+                if (Spawned)
+                {
+                    Drawer.DrawTrackerTick();
+                    //this.rotationTracker.RotationTrackerTick();
+                }
+            }
+        }
+        
         private int TicksPerMove(bool diagonal)
         {
             float statValue = this.GetStatValue(StatDefOf.MoveSpeed);
@@ -48,6 +76,11 @@ namespace TheCapital
                     drawer = new ActorDrawTracker(this);
                 return drawer;
             }
+        }
+        
+        public override void DrawAt(Vector3 drawLoc, bool flip = false)
+        {
+            Drawer.DrawAt(drawLoc);
         }
         
         public void Notify_Teleported(bool endCurrentJob = true, bool resetTweenedPos = true)
